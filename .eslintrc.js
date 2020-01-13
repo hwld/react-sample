@@ -48,7 +48,7 @@ module.exports = {
   root: true,
   rules: {
     // eslint official
-    'linebreak-style': ['error', 'unix'],
+    //'linebreak-style': ['error', 'windows'],
     'newline-before-return': 'error',
     'no-console': 'warn',
     'no-continue': 'off',
