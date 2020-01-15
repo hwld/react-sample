@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Board from 'components/Board';
 import GameStatus from 'components/GameStatus';
-import { calculateWinner } from 'util/calculateWinner';
+import { calculateGameStatus } from 'util/calculateGameStatus';
 import HistoryList, { HistoryItem } from './HistoryList';
 
 interface StateType {
@@ -27,6 +27,7 @@ const Game: React.FC = () => {
 
   const history = state.history.slice(0, state.stepNumber + 1);
   const current = history[history.length - 1];
+  const gameStatus = calculateGameStatus(current.squares);
 
   const jumpTo = (step: number) => {
     setState(prevState => ({
@@ -39,7 +40,7 @@ const Game: React.FC = () => {
   const handleClick = (i: number) => {
     const squares = current.squares.slice();
 
-    if (calculateWinner(squares) || squares[i]) {
+    if (gameStatus.isFinish || squares[i]) {
       return;
     }
 
@@ -65,11 +66,15 @@ const Game: React.FC = () => {
   return (
     <div className="game">
       <div className="game-board">
-        <Board squares={current.squares} onClick={i => handleClick(i)} />
+        <Board
+          squares={current.squares}
+          winFactors={gameStatus.winFactors}
+          onClick={i => handleClick(i)}
+        />
       </div>
       <div className="game-info">
         <GameStatus
-          winner={calculateWinner(current.squares)}
+          status={gameStatus}
           nextPlayer={state.xIsNext ? 'X' : 'O'}
         />
         <HistoryList

@@ -50,6 +50,10 @@ button.selected{
   outline: none;
 }
 
+.winFactor{
+  background-color: yellow;
+}
+
 .kbd-navigation .square:focus {
   background: #ddd;
 }

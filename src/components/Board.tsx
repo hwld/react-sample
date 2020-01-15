@@ -2,13 +2,19 @@ import React from 'react';
 import Square from 'components/Square';
 
 interface BoardProp {
-  squares: string[] | null[];
+  squares: (string | null)[];
+  winFactors: (number | null)[];
   onClick: (i: number) => void;
 }
 
-const Board: React.FC<BoardProp> = ({ squares, onClick }) => {
+const Board: React.FC<BoardProp> = ({ squares, winFactors, onClick }) => {
   const renderSquare = (i: number) => (
-    <Square value={squares[i]} onClick={() => onClick(i)} key={i} />
+    <Square
+      value={squares[i]}
+      onClick={() => onClick(i)}
+      key={i}
+      isWinFactor={winFactors.includes(i)}
+    />
   );
 
   return (
