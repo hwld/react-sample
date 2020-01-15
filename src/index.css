@@ -16,6 +16,11 @@ ol, ul {
   padding-left: 30px;
 }
 
+
+button.selected{
+  font-weight: bold;
+}
+
 .board-row::after {
   clear: both;
   content: '';

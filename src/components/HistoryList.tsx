@@ -8,10 +8,15 @@ export interface HistoryItem {
 
 interface HistoryListProps {
   history: HistoryItem[];
-  onClick: (move: number) => void;
+  stepNum: number;
+  jumpTo: (move: number) => void;
 }
 
-const HistoryList: React.FC<HistoryListProps> = ({ history, onClick }) => {
+const HistoryList: React.FC<HistoryListProps> = ({
+  history,
+  stepNum,
+  jumpTo,
+}) => {
   const moves = history.map((step, move) => {
     const desc = move
       ? `Go to move #{col: ${step.hand.col} , row: ${step.hand.row}}`
@@ -19,7 +24,11 @@ const HistoryList: React.FC<HistoryListProps> = ({ history, onClick }) => {
 
     return (
       <li key={step.id}>
-        <button type="button" onClick={() => onClick(move)}>
+        <button
+          className={stepNum === move ? 'selected' : ''}
+          type="button"
+          onClick={() => jumpTo(move)}
+        >
           {desc}
         </button>
       </li>

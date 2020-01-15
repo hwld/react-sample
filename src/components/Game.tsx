@@ -72,7 +72,11 @@ const Game: React.FC = () => {
           winner={calculateWinner(current.squares)}
           nextPlayer={state.xIsNext ? 'X' : 'O'}
         />
-        <HistoryList history={state.history} onClick={i => jumpTo(i)} />
+        <HistoryList
+          history={state.history}
+          stepNum={state.stepNumber}
+          jumpTo={i => jumpTo(i)}
+        />
       </div>
     </div>
   );
