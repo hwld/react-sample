@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 import Board from 'components/Board';
 import GameStatus from 'components/GameStatus';
 import { calculateWinner } from 'util/calculateWinner';
-import HistoryList from './HistoryList';
-
-interface HistoryItem {
-  squares: string[] | null[];
-  id: number;
-}
+import HistoryList, { HistoryItem } from './HistoryList';
 
 interface StateType {
   history: HistoryItem[];
@@ -21,6 +16,7 @@ const Game: React.FC = () => {
     history: [
       {
         squares: Array(9).fill(null),
+        hand: { col: 0, row: 0 },
         id: 0,
       },
     ],
@@ -42,15 +38,21 @@ const Game: React.FC = () => {
 
   const handleClick = (i: number) => {
     const squares = current.squares.slice();
+
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
+
     squares[i] = state.xIsNext ? 'X' : 'O';
+    const col = (i % 3) + 1;
+    const row = Math.floor(i / 3) + 1;
+
     setState(prevState => ({
       ...prevState,
       history: history.concat([
         {
           squares,
+          hand: { col, row },
           id: prevState.nextHistoryId,
         },
       ]),
@@ -70,7 +72,7 @@ const Game: React.FC = () => {
           winner={calculateWinner(current.squares)}
           nextPlayer={state.xIsNext ? 'X' : 'O'}
         />
-        <HistoryList history={history} onClick={i => jumpTo(i)} />
+        <HistoryList history={state.history} onClick={i => jumpTo(i)} />
       </div>
     </div>
   );

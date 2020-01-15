@@ -1,7 +1,8 @@
 import React from 'react';
 
-interface HistoryItem {
+export interface HistoryItem {
   squares: string[] | null[];
+  hand: { col: number; row: number };
   id: number;
 }
 
@@ -12,7 +13,9 @@ interface HistoryListProps {
 
 const HistoryList: React.FC<HistoryListProps> = ({ history, onClick }) => {
   const moves = history.map((step, move) => {
-    const desc = move ? `Go to move #${move}` : 'Go to game start';
+    const desc = move
+      ? `Go to move #{col: ${step.hand.col} , row: ${step.hand.row}}`
+      : 'Go to game start';
 
     return (
       <li key={step.id}>

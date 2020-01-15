@@ -5,7 +5,6 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  margin: 20px;
 }
 
 code {
@@ -53,6 +52,7 @@ ol, ul {
 .game {
   display: flex;
   flex-direction: row;
+  margin: 30px;
 }
 
 .game-info {
