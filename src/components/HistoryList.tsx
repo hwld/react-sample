@@ -17,7 +17,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
   stepNum,
   jumpTo,
 }) => {
-  const [order, setOrder] = useState('asc');
+  const [isAsc, setIsAsc] = useState(true);
 
   const moves = history.map((step, move) => {
     const desc = move
@@ -42,12 +42,11 @@ const HistoryList: React.FC<HistoryListProps> = ({
       <label htmlFor="asc">
         <input
           type="radio"
-          value="asc"
           id="asc"
           name="order"
-          checked={order === 'asc'}
-          onChange={event => {
-            setOrder(event.target.value);
+          checked={isAsc}
+          onChange={() => {
+            setIsAsc(true);
           }}
         />
         昇順
@@ -56,18 +55,17 @@ const HistoryList: React.FC<HistoryListProps> = ({
       <label htmlFor="desc">
         <input
           type="radio"
-          value="desc"
           id="desc"
           name="order"
-          checked={order === 'desc'}
-          onChange={event => {
-            setOrder(event.target.value);
+          checked={!isAsc}
+          onChange={() => {
+            setIsAsc(false);
           }}
         />
         降順
       </label>
 
-      <ol className={order === 'asc' ? 'history-list' : 'history-list-reverse'}>
+      <ol className={isAsc ? 'history-list' : 'history-list-reverse'}>
         {moves}
       </ol>
     </>

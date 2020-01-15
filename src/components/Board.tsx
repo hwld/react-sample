@@ -8,7 +8,7 @@ interface BoardProp {
 
 const Board: React.FC<BoardProp> = ({ squares, onClick }) => {
   const renderSquare = (i: number) => (
-    <Square value={squares[i]} onClick={() => onClick(i)} />
+    <Square value={squares[i]} onClick={() => onClick(i)} key={i} />
   );
 
   return (
