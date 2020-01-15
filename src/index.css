@@ -63,3 +63,13 @@ button.selected{
 .game-info {
   margin-left: 20px;
 }
+
+.histor-list{
+  display: flex;
+  flex-direction: column;
+}
+
+.history-list-reverse{
+  display: flex;
+  flex-direction: column-reverse;
+}
