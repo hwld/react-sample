@@ -24,7 +24,6 @@ const Game: React.FC = () => {
     stepNumber: 0,
     xIsNext: true,
   });
-
   const history = state.history.slice(0, state.stepNumber + 1);
   const current = history[history.length - 1];
   const gameStatus = calculateGameStatus(current.squares);
@@ -39,15 +38,12 @@ const Game: React.FC = () => {
 
   const handleClick = (i: number) => {
     const squares = current.squares.slice();
-
     if (gameStatus.isFinish || squares[i]) {
       return;
     }
-
     squares[i] = state.xIsNext ? 'X' : 'O';
     const col = (i % 3) + 1;
     const row = Math.floor(i / 3) + 1;
-
     setState(prevState => ({
       ...prevState,
       history: history.concat([
