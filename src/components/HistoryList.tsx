@@ -1,10 +1,5 @@
 import React, { useState } from 'react';
-
-export interface HistoryItem {
-  squares: string[] | null[];
-  hand: { col: number; row: number };
-  id: number;
-}
+import { HistoryItem } from 'store/game';
 
 interface HistoryListProps {
   history: HistoryItem[];

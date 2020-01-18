@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import Board from 'components/Board';
 import GameStatus from 'components/GameStatus';
+import HistoryList from 'components/HistoryList';
+
 import { calculateGameStatus } from 'util/calculateGameStatus';
-import HistoryList, { HistoryItem } from './HistoryList';
+import { HistoryItem } from 'store/game';
 
 interface StateType {
   history: HistoryItem[];

@@ -1,8 +1,4 @@
-export interface GameStatusItem {
-  isFinish: boolean;
-  winner: string | null;
-  winFactors: (number | null)[];
-}
+import { GameStatusItem } from 'store/game';
 
 export function calculateGameStatus(
   squares: (string | null)[],
