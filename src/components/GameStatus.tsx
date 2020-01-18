@@ -1,5 +1,5 @@
 import React from 'react';
-import { GameStatusItem } from 'util/calculateGameStatus';
+import { GameStatusItem } from 'stores/game';
 
 interface GameStatusProps {
   status: GameStatusItem;

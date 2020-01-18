@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { calculateGameStatus } from 'util/calculateGameStatus';
-import GameStatus from 'components/GameStatus';
 
 export interface HistoryItem {
   squares: string[] | null[];
@@ -47,9 +46,7 @@ const slice = createSlice({
         ...state,
         stepNumber,
         xIsNext: stepNumber % 2 === 0,
-        gameStatus: calculateGameStatus(
-          state.history[state.stepNumber].squares,
-        ),
+        gameStatus: calculateGameStatus(state.history[stepNumber].squares),
       };
     },
     addNextMove(state, action: PayloadAction<number>) {
@@ -57,7 +54,7 @@ const slice = createSlice({
       const col = (index % 3) + 1;
       const row = Math.floor(index / 3) + 1;
       const history = state.history.slice(0, state.stepNumber + 1);
-      const { squares } = history[state.stepNumber];
+      const squares = history[state.stepNumber].squares.slice();
 
       if (state.gameStatus.isFinish || squares[index]) return state;
 
@@ -81,4 +78,6 @@ const slice = createSlice({
   },
 });
 
-export default slice;
+export const { junpTo, addNextMove } = slice.actions;
+
+export default slice.reducer;

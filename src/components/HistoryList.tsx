@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { HistoryItem } from 'store/game';
+import { HistoryItem } from 'stores/game';
 
 interface HistoryListProps {
   history: HistoryItem[];

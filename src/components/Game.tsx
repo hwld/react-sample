@@ -1,84 +1,33 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Board from 'components/Board';
 import GameStatus from 'components/GameStatus';
 import HistoryList from 'components/HistoryList';
 
-import { calculateGameStatus } from 'util/calculateGameStatus';
-import { HistoryItem } from 'store/game';
-
-interface StateType {
-  history: HistoryItem[];
-  nextHistoryId: number;
-  stepNumber: number;
-  xIsNext: boolean;
-}
+import { junpTo, addNextMove } from 'stores/game';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from 'stores';
 
 const Game: React.FC = () => {
-  const [state, setState] = useState<StateType>({
-    history: [
-      {
-        squares: Array(9).fill(null),
-        hand: { col: 0, row: 0 },
-        id: 0,
-      },
-    ],
-    nextHistoryId: 1,
-    stepNumber: 0,
-    xIsNext: true,
-  });
-  const history = state.history.slice(0, state.stepNumber + 1);
-  const current = history[history.length - 1];
-  const gameStatus = calculateGameStatus(current.squares);
-
-  const jumpTo = (step: number) => {
-    setState(prevState => ({
-      ...prevState,
-      stepNumber: step,
-      xIsNext: step % 2 === 0,
-    }));
-  };
-
-  const handleClick = (i: number) => {
-    const squares = current.squares.slice();
-    if (gameStatus.isFinish || squares[i]) {
-      return;
-    }
-    squares[i] = state.xIsNext ? 'X' : 'O';
-    const col = (i % 3) + 1;
-    const row = Math.floor(i / 3) + 1;
-    setState(prevState => ({
-      ...prevState,
-      history: history.concat([
-        {
-          squares,
-          hand: { col, row },
-          id: prevState.nextHistoryId,
-        },
-      ]),
-      nextHistoryId: prevState.nextHistoryId + 1,
-      stepNumber: history.length,
-      xIsNext: !prevState.xIsNext,
-    }));
-  };
+  const dispatch = useDispatch();
+  const { history, stepNumber, xIsNext, gameStatus } = useSelector(
+    (state: RootState) => state.game,
+  );
 
   return (
     <div className="game">
       <div className="game-board">
         <Board
-          squares={current.squares}
+          squares={history[stepNumber].squares}
           winFactors={gameStatus.winFactors}
-          onClick={i => handleClick(i)}
+          onClick={i => dispatch(addNextMove(i))}
         />
       </div>
       <div className="game-info">
-        <GameStatus
-          status={gameStatus}
-          nextPlayer={state.xIsNext ? 'X' : 'O'}
-        />
+        <GameStatus status={gameStatus} nextPlayer={xIsNext ? 'X' : 'O'} />
         <HistoryList
-          history={state.history}
-          stepNum={state.stepNumber}
-          jumpTo={i => jumpTo(i)}
+          history={history}
+          stepNum={stepNumber}
+          jumpTo={i => dispatch(junpTo(i))}
         />
       </div>
     </div>

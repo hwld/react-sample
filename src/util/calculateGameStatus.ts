@@ -1,4 +1,4 @@
-import { GameStatusItem } from 'store/game';
+import { GameStatusItem } from 'stores/game';
 
 export function calculateGameStatus(
   squares: (string | null)[],
