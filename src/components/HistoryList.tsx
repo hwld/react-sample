@@ -13,6 +13,9 @@ const HistoryList: React.FC<HistoryListProps> = ({
   jumpTo,
 }) => {
   const [isAsc, setIsAsc] = useState(true);
+  const radioName = Math.random().toString();
+  const ascId = Math.random().toString();
+  const descId = Math.random().toString();
 
   const moves = history.map((step, move) => {
     const desc = move
@@ -34,11 +37,11 @@ const HistoryList: React.FC<HistoryListProps> = ({
 
   return (
     <>
-      <label htmlFor="asc">
+      <label htmlFor={ascId}>
         <input
           type="radio"
-          id="asc"
-          name="order"
+          name={radioName}
+          id={ascId}
           checked={isAsc}
           onChange={() => {
             setIsAsc(true);
@@ -47,11 +50,11 @@ const HistoryList: React.FC<HistoryListProps> = ({
         昇順
       </label>
 
-      <label htmlFor="desc">
+      <label htmlFor={descId}>
         <input
           type="radio"
-          id="desc"
-          name="order"
+          name={radioName}
+          id={descId}
           checked={!isAsc}
           onChange={() => {
             setIsAsc(false);
