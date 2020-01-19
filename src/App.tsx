@@ -7,6 +7,11 @@ const App: React.FC = () => {
     <div className="App">
       <Game />
       <Game />
+      <Game />
+      <Game />
+      <Game />
+      <Game />
+      <Game />
     </div>
   );
 };

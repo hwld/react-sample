@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import { HistoryItem } from 'stores/game';
+import Button from '@material-ui/core/Button';
+import {
+  FormControl,
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+} from '@material-ui/core';
 
 interface HistoryListProps {
   history: HistoryItem[];
@@ -13,9 +20,15 @@ const HistoryList: React.FC<HistoryListProps> = ({
   jumpTo,
 }) => {
   const [isAsc, setIsAsc] = useState(true);
+  /*
   const radioName = Math.random().toString();
   const ascId = Math.random().toString();
   const descId = Math.random().toString();
+*/
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAsc(event.target.value === 'asc');
+  };
 
   const moves = history.map((step, move) => {
     const desc = move
@@ -24,44 +37,35 @@ const HistoryList: React.FC<HistoryListProps> = ({
 
     return (
       <li key={step.id}>
-        <button
+        <Button
+          variant="outlined"
           className={stepNum === move ? 'selected' : ''}
-          type="button"
           onClick={() => jumpTo(move)}
         >
           {desc}
-        </button>
+        </Button>
       </li>
     );
   });
 
   return (
     <>
-      <label htmlFor={ascId}>
-        <input
-          type="radio"
-          name={radioName}
-          id={ascId}
-          checked={isAsc}
-          onChange={() => {
-            setIsAsc(true);
-          }}
-        />
-        昇順
-      </label>
-
-      <label htmlFor={descId}>
-        <input
-          type="radio"
-          name={radioName}
-          id={descId}
-          checked={!isAsc}
-          onChange={() => {
-            setIsAsc(false);
-          }}
-        />
-        降順
-      </label>
+      <FormControl>
+        <RadioGroup onChange={handleChange}>
+          <div>
+            <FormControlLabel
+              value="asc"
+              control={<Radio color="primary" />}
+              label="昇順"
+            />
+            <FormControlLabel
+              value="desc"
+              control={<Radio color="primary" />}
+              label="降順"
+            />
+          </div>
+        </RadioGroup>
+      </FormControl>
 
       <ol className={isAsc ? 'history-list' : 'history-list-reverse'}>
         {moves}

@@ -1,5 +1,6 @@
 import React from 'react';
 import { GameStatusItem } from 'stores/game';
+import { Typography } from '@material-ui/core';
 
 interface GameStatusProps {
   status: GameStatusItem;
@@ -17,7 +18,7 @@ const GameStatus: React.FC<GameStatusProps> = ({ status, nextPlayer }) => {
     message = 'Draw';
   }
 
-  return <div>{message}</div>;
+  return <Typography>{message}</Typography>;
 };
 
 export default GameStatus;

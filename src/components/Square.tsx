@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '@material-ui/core/Button';
+import { Clear, PanoramaFishEye } from '@material-ui/icons';
 
 interface SquareProps {
   value: string | null;
@@ -10,10 +12,17 @@ const Square: React.FC<SquareProps> = ({ value, isWinFactor, onClick }) => {
   let classNames = 'square';
   if (isWinFactor) classNames += ' winFactor';
 
+  const renderIcon = () => (value === 'O' ? <PanoramaFishEye /> : <Clear />);
+
   return (
-    <button type="button" className={classNames} onClick={() => onClick()}>
-      {value}
-    </button>
+    <Button
+      disableElevation
+      variant={isWinFactor ? 'contained' : 'outlined'}
+      className={classNames}
+      onClick={() => onClick()}
+    >
+      {value == null ? null : renderIcon()}
+    </Button>
   );
 };
 
