@@ -1,1 +1,1 @@
-React公式サイトのTutorialをTypeScript,Redux,ReduxToolkit,MaterialUIを使って書いてみた
+React公式サイトのTutorialをReactHooks,TypeScript,Redux,ReduxToolkit,MaterialUIを使って書いてみた
