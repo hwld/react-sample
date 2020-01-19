@@ -6,12 +6,6 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <Game />
-      <Game />
-      <Game />
-      <Game />
-      <Game />
-      <Game />
-      <Game />
     </div>
   );
 };
