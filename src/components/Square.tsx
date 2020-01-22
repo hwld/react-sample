@@ -9,7 +9,9 @@ interface SquareProps {
   onClick: () => void;
 }
 
-const SquareButton = styled(Button)<{ isWinFactor: boolean }>`
+const SquareButton = styled(({ isWinFactor, children, ...props }) => (
+  <Button {...props}>{children}</Button>
+))`
   background-color: ${props => (props.isWinFactor ? 'yellow' : 'white')};
   height: 60px;
   width: 60px;
@@ -25,7 +27,7 @@ const Square: React.FC<SquareProps> = ({ value, isWinFactor, onClick }) => {
       variant="outlined"
       onClick={() => onClick()}
     >
-      {value == null ? null : renderIcon()}
+      {value == null ? ' ' : renderIcon()}
     </SquareButton>
   );
 };
