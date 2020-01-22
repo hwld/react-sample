@@ -10,6 +10,7 @@ module.exports = {
   rules: {
     'indentation': 2,
     'string-quotes': 'single',
-    'order/properties-alphabetical-order': true
+    'order/properties-alphabetical-order': true,
+    'declaration-empty-line-before': 'never'
   },
 };

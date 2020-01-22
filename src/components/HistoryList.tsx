@@ -19,15 +19,10 @@ const HistoryList: React.FC<HistoryListProps> = ({
   stepNum,
   jumpTo,
 }) => {
-  const [isAsc, setIsAsc] = useState(true);
-  /*
-  const radioName = Math.random().toString();
-  const ascId = Math.random().toString();
-  const descId = Math.random().toString();
-*/
+  const [value, setValue] = useState('asc');
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsAsc(event.target.value === 'asc');
+    setValue(event.target.value);
   };
 
   const moves = history.map((step, move) => {
@@ -51,10 +46,11 @@ const HistoryList: React.FC<HistoryListProps> = ({
   return (
     <>
       <FormControl>
-        <RadioGroup onChange={handleChange}>
+        <RadioGroup value={value} onChange={handleChange}>
           <div>
             <FormControlLabel
               value="asc"
+              defaultChecked
               control={<Radio color="primary" />}
               label="昇順"
             />
@@ -67,7 +63,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
         </RadioGroup>
       </FormControl>
 
-      <ol className={isAsc ? 'history-list' : 'history-list-reverse'}>
+      <ol className={value === 'asc' ? 'history-list' : 'history-list-reverse'}>
         {moves}
       </ol>
     </>
