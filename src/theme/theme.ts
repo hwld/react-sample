@@ -1,8 +1,22 @@
 import { createMuiTheme } from '@material-ui/core';
-import { blue, red } from '@material-ui/core/colors';
 
 const theme = createMuiTheme({
-  palette: { primary: blue, secondary: red },
+  palette: {
+    primary: {
+      main: '#212121',
+    },
+    secondary: {
+      main: '#dd2c00',
+    },
+    text: {
+      primary: '#ffffff',
+    },
+  },
+  props: {
+    MuiTypography: {
+      color: 'textPrimary',
+    },
+  },
 });
 
 export default theme;

@@ -27,8 +27,10 @@ type StyledHistoryItemProps = HistoryListProps & ThemeProps;
 const StyledHistoryItem = styled(({ selected, children, ...props }) => (
   <Button {...props}>{children}</Button>
 ))`
-  background-color: 
-  font-weight: ;
+  background-color: ${props =>
+    props.selected
+      ? props.theme.palette.secondary.dark
+      : props.theme.palette.secondary.main};
 `;
 
 const StyledHistoryList = styled.ol<{ isAsc: boolean }>`
