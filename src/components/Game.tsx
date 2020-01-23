@@ -6,6 +6,17 @@ import HistoryList from 'components/HistoryList';
 import { junpTo, addNextMove } from 'stores/game';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from 'stores';
+import styled from 'styled-components';
+
+const GameRoot = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin: 30px;
+`;
+
+const GameInfo = styled.div`
+  margin-left: 20px;
+`;
 
 const Game: React.FC = () => {
   const dispatch = useDispatch();
@@ -14,23 +25,23 @@ const Game: React.FC = () => {
   );
 
   return (
-    <div className="game">
-      <div className="game-board">
+    <GameRoot>
+      <div>
         <Board
           squares={history[stepNumber].squares}
           winFactors={gameStatus.winFactors}
           onClick={i => dispatch(addNextMove(i))}
         />
       </div>
-      <div className="game-info">
+      <GameInfo>
         <GameStatus status={gameStatus} nextPlayer={xIsNext ? 'X' : 'O'} />
         <HistoryList
           history={history}
           stepNum={stepNumber}
           jumpTo={i => dispatch(junpTo(i))}
         />
-      </div>
-    </div>
+      </GameInfo>
+    </GameRoot>
   );
 };
 

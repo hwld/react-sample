@@ -7,13 +7,28 @@ import {
   FormControlLabel,
   Radio,
 } from '@material-ui/core';
+import styled from 'styled-components';
 
+// type
 interface HistoryListProps {
   history: HistoryItem[];
   stepNum: number;
   jumpTo: (move: number) => void;
 }
 
+// style
+const StyledHistoryItem = styled(({ selected, children, ...props }) => (
+  <Button {...props}>{children}</Button>
+))`
+  font-weight: ${props => (props.selected ? 'bold' : 'normal')};
+`;
+
+const StyledHistoryList = styled.ol<{ isAsc: boolean }>`
+  display: flex;
+  flex-direction: ${props => (props.isAsc ? 'column' : 'column-reverse')};
+`;
+
+// component
 const HistoryList: React.FC<HistoryListProps> = ({
   history,
   stepNum,
@@ -32,13 +47,13 @@ const HistoryList: React.FC<HistoryListProps> = ({
 
     return (
       <li key={step.id}>
-        <Button
+        <StyledHistoryItem
           variant="outlined"
-          className={stepNum === move ? 'selected' : ''}
+          selected={stepNum === move}
           onClick={() => jumpTo(move)}
         >
           {desc}
-        </Button>
+        </StyledHistoryItem>
       </li>
     );
   });
@@ -63,9 +78,7 @@ const HistoryList: React.FC<HistoryListProps> = ({
         </RadioGroup>
       </FormControl>
 
-      <ol className={value === 'asc' ? 'history-list' : 'history-list-reverse'}>
-        {moves}
-      </ol>
+      <StyledHistoryList isAsc={value === 'asc'}>{moves}</StyledHistoryList>
     </>
   );
 };
