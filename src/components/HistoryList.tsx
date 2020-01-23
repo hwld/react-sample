@@ -21,13 +21,14 @@ interface ThemeProps {
   theme: Theme;
 }
 
-type StyledHistoryItemProps = HistoryListProps & ThemeProps;
+type StyledHistoryItemProps = HistoryListProps &
+  ThemeProps & { selected: boolean };
 
 // style
 const StyledHistoryItem = styled(({ selected, children, ...props }) => (
   <Button {...props}>{children}</Button>
 ))`
-  background-color: ${props =>
+  background-color: ${(props: StyledHistoryItemProps) =>
     props.selected
       ? props.theme.palette.secondary.dark
       : props.theme.palette.secondary.main};

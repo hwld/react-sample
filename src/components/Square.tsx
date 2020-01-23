@@ -18,7 +18,7 @@ const SquareButton = styled(({ isWinFactor, children, ...props }) => (
 ))`
   background-color: ${(props: SquareProps & ThemeProps) =>
     props.isWinFactor
-      ? props.theme.palette.secondary.light
+      ? props.theme.palette.secondary.dark
       : props.theme.palette.secondary.main};
   height: 60px;
   width: 60px;
