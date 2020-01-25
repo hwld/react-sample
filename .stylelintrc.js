@@ -8,9 +8,11 @@ module.exports = {
     '**/node_modules/**',
   ],
   rules: {
-    'indentation': 2,
+    'indentation': [2, {
+      "ignore": ["value"]
+    }],
     'string-quotes': 'single',
     'order/properties-alphabetical-order': true,
-    'declaration-empty-line-before': 'never'
+    'declaration-empty-line-before': 'never',
   },
 };

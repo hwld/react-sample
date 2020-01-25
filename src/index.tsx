@@ -13,15 +13,15 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <MaterialThemeProvider theme={theme}>
-    <StyledThemeProvider theme={theme}>
-      <StylesProvider injectFirst>
+  <StylesProvider injectFirst>
+    <MaterialThemeProvider theme={theme}>
+      <StyledThemeProvider theme={theme}>
         <Provider store={store}>
           <App />
         </Provider>
-      </StylesProvider>
-    </StyledThemeProvider>
-  </MaterialThemeProvider>,
+      </StyledThemeProvider>
+    </MaterialThemeProvider>
+  </StylesProvider>,
   document.getElementById('root'),
 );
 
