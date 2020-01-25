@@ -13,6 +13,7 @@ const StyledButton = styled(Button)`
     props.className === 'selected'
       ? props.theme.palette.secondary.dark
       : props.theme.palette.secondary.main};
+  width: 20em;
 `;
 
 const HistoryListItem: React.FC<HistoryItemProps> = ({
