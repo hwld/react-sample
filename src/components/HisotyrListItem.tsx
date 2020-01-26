@@ -1,5 +1,5 @@
 import React from 'react';
-import { ButtonProps, Button, Theme } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import styled from 'styled-components';
 
 interface HistoryItemProps {
@@ -9,11 +9,12 @@ interface HistoryItemProps {
 }
 
 const StyledButton = styled(Button)`
-  background-color: ${(props: ButtonProps & { theme: Theme }) =>
-    props.className === 'selected'
-      ? props.theme.palette.secondary.dark
-      : props.theme.palette.secondary.main};
+  background-color: ${props => props.theme.palette.secondary.main};
   width: 20em;
+
+  &.selected {
+    background-color: ${props => props.theme.palette.secondary.dark};
+  }
 `;
 
 const HistoryListItem: React.FC<HistoryItemProps> = ({
@@ -23,7 +24,7 @@ const HistoryListItem: React.FC<HistoryItemProps> = ({
 }) => {
   return (
     <StyledButton
-      className={selected ? 'selected' : 'normal'}
+      className={selected ? 'selected' : ''}
       variant="outlined"
       onClick={onClick}
     >

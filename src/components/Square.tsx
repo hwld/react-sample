@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Theme, ButtonProps } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import { Clear, PanoramaFishEye } from '@material-ui/icons';
 
 interface SquareProps {
@@ -10,12 +10,13 @@ interface SquareProps {
 }
 
 const SquareButton = styled(Button)`
-  background-color: ${(props: ButtonProps & { theme: Theme }) =>
-    props.className === 'winFactor'
-      ? props.theme.palette.secondary.dark
-      : props.theme.palette.secondary.main};
+  background-color: ${props => props.theme.palette.secondary.main};
   height: 60px;
   width: 60px;
+
+  &.winFactor {
+    background-color: ${props => props.theme.palette.secondary.dark};
+  }
 `;
 
 const Square: React.FC<SquareProps> = ({ value, isWinFactor, onClick }) => {
@@ -23,7 +24,7 @@ const Square: React.FC<SquareProps> = ({ value, isWinFactor, onClick }) => {
 
   return (
     <SquareButton
-      className={isWinFactor ? 'winFactor' : 'notWinFactor'}
+      className={isWinFactor ? 'winFactor' : ''}
       disableElevation
       variant="outlined"
       onClick={() => onClick()}
